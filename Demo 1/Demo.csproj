@@ -16,10 +16,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="FluentApi">
-      <HintPath>A:\ASP.net\FluentApi\FluentApi\bin\Debug\net7.0\FluentApi.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
