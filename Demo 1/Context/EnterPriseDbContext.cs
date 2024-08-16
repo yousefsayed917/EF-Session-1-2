@@ -41,7 +41,7 @@ namespace Demo.Context
             //                .HasColumnType("Varchar").HasMaxLength(50);
             //});
             #endregion
-            modelBuilder.ApplyConfiguration(new DepartmentConfigration());
+            modelBuilder.ApplyConfiguration(new DepartmentConfigration());//كدا بنستخدم الطريقة الربعة اللي هي تنظيم لل fluent api
         }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
