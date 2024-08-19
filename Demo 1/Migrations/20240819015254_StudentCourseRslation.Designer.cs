@@ -4,16 +4,19 @@ using Demo.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Demo.Migrations
+namespace Demo_1.Migrations
 {
     [DbContext(typeof(EnterPriseDbContext))]
-    partial class EnterPriseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240819015254_StudentCourseRslation")]
+    partial class StudentCourseRslation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

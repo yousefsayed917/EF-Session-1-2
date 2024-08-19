@@ -10,7 +10,7 @@ namespace Demo.Entities
 {
     //EF Supports 4 ways for mapping classes to database [tables/views]
     //الكلاس دا كدا اسمو poco class[Plain Old CLR Object] عشان معندهوش اي فانكشن فيه بروبيرتي بس 
-    internal class Employee
+    public class Employee
     {
         #region 1- By Convention [Default Behaviour]
         //public int Id { get; set; }
@@ -52,10 +52,13 @@ namespace Demo.Entities
         [DataType(DataType.Password)]//بتبان ف ال front
         public string Password { get; set; }
 
-        #endregion
-        #region 3- Fluent api
+        #region Department Relation
+        public Department Department { get; set; }//navigational property=> ناحية ال  1
 
-
+        [ForeignKey("Department")]
+        public int? DeptId { get; set; }
         #endregion
+        #endregion
+
     }
 }
