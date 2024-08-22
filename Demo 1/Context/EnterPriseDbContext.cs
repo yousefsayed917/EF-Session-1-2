@@ -1,6 +1,5 @@
 ﻿using Demo.Configration;
 using Demo.Entities;
-using Demo_1.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace Demo.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Data source =JOO; Initial Catalog = Enterprise; UserId = yousef; Password = 123;");
-            optionsBuilder.UseSqlServer("Server = JOO;Database = Enterprise;Trusted_Connection = true;TrustServerCertificate = True;");
+            optionsBuilder.UseSqlServer("Server = JOO;Database = Enterprise;Trusted_Connection = true;TrustServerCertificate = True;",x=>x.UseDateOnlyTimeOnly());
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,7 +43,9 @@ namespace Demo.Context
             #endregion
             modelBuilder.ApplyConfiguration(new DepartmentConfigration());//كدا بنستخدم الطريقة الربعة اللي هي تنظيم لل fluent api
             #region Relation with fluent api
-            //modelBuilder.Entity<Department>().HasMany(p => p.Employees).WithOne(p => p.Department).HasForeignKey(p=>p.DeparmentId);
+            //modelBuilder.Entity<Department>().HasMany(p => p.Employees)
+            //    .WithOne(p => p.Department)
+            //    .HasForeignKey(p=>p.DeptId);
             //modelBuilder.Entity<Employee>().HasOne(p => p.Department).WithMany(p => p.Employees);
             #endregion
             #region Relation M to M between Student and course

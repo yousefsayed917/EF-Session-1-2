@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TPCC.Context;
 
@@ -11,9 +12,11 @@ using TPCC.Context;
 namespace TPCC.Migrations
 {
     [DbContext(typeof(EnterPriseDbContext))]
-    partial class EnterPriseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240821153933_changeNameOfTableEmployee")]
+    partial class changeNameOfTableEmployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

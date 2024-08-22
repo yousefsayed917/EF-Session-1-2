@@ -4,6 +4,7 @@ using Demo.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.Migrations
 {
     [DbContext(typeof(EnterPriseDbContext))]
-    partial class EnterPriseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240821165513_changedatatype")]
+    partial class Changedatatype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,7 +89,7 @@ namespace Demo.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("Demo_1.Entities.Course", b =>
+            modelBuilder.Entity("Demo.Entities.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,7 +106,7 @@ namespace Demo.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Demo_1.Entities.Student", b =>
+            modelBuilder.Entity("Demo.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +126,7 @@ namespace Demo.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("Demo_1.Entities.StudentCourse", b =>
+            modelBuilder.Entity("Demo.Entities.StudentCourse", b =>
                 {
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
@@ -150,15 +153,15 @@ namespace Demo.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("Demo_1.Entities.StudentCourse", b =>
+            modelBuilder.Entity("Demo.Entities.StudentCourse", b =>
                 {
-                    b.HasOne("Demo_1.Entities.Course", "Course")
+                    b.HasOne("Demo.Entities.Course", "Course")
                         .WithMany("CourseStudents")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Demo_1.Entities.Student", "Student")
+                    b.HasOne("Demo.Entities.Student", "Student")
                         .WithMany("StudentCourses")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -174,12 +177,12 @@ namespace Demo.Migrations
                     b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("Demo_1.Entities.Course", b =>
+            modelBuilder.Entity("Demo.Entities.Course", b =>
                 {
                     b.Navigation("CourseStudents");
                 });
 
-            modelBuilder.Entity("Demo_1.Entities.Student", b =>
+            modelBuilder.Entity("Demo.Entities.Student", b =>
                 {
                     b.Navigation("StudentCourses");
                 });

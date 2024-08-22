@@ -53,6 +53,7 @@ namespace Demo.Entities
         public string Password { get; set; }
 
         #region Department Relation
+        [InverseProperty("Employees")]
         public Department Department { get; set; }//navigational property=> ناحية ال  1
 
         [ForeignKey("Department")]

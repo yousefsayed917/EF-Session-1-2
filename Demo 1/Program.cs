@@ -32,27 +32,27 @@ namespace Demo_1
             //Syntax suger
             //using EnterPriseDbContext dbContext = new EnterPriseDbContext();
             #endregion
-            using EnterPriseDbContext dbContext = new EnterPriseDbContext();
+            //using EnterPriseDbContext dbContext = new EnterPriseDbContext();
             #region CRUD Operations
-            Employee employee1 = new Employee()
-            {
-                //EmpId=1; is invalid because the column has identity
-                EmpName = "yousef",
-                Age = 22,
-                Email = "yousefsayed366@gmail.com",
-                Password = "password",
-                Phone = "1234567890",
-                Salary = 10000
-            };
-            Employee employee2 = new Employee()
-            {
-                EmpName = "mohamed",
-                Age = 23,
-                Email = "mohamedadel366@gmail.com",
-                Password = "password",
-                Phone = "1234567890",
-                Salary = 100000
-            };
+            //Employee employee1 = new Employee()
+            //{
+            //    //EmpId=1; is invalid because the column has identity
+            //    EmpName = "yousef",
+            //    Age = 22,
+            //    Email = "yousefsayed366@gmail.com",
+            //    Password = "password",
+            //    Phone = "1234567890",
+            //    Salary = 10000
+            //};
+            //Employee employee2 = new Employee()
+            //{
+            //    EmpName = "mohamed",
+            //    Age = 23,
+            //    Email = "mohamedadel366@gmail.com",
+            //    Password = "password",
+            //    Phone = "1234567890",
+            //    Salary = 100000
+            //};
             #region Insert
             //Console.WriteLine(dbContext.Entry(employee1).State);//Detached
             //Console.WriteLine(dbContext.Entry(employee2).State);//Detached
@@ -94,6 +94,48 @@ namespace Demo_1
             //Console.WriteLine(dbContext.Entry(result).State);//
             //dbContext.SaveChanges();
             #endregion
+            #endregion
+            #endregion
+            #region Session 3
+            using EnterPriseDbContext dbContext = new EnterPriseDbContext();
+            #region With Out Loading
+            //var result = (from emp in dbContext.Employees
+            //              where emp.EmpId==1
+            //              select emp).FirstOrDefault();
+            //Console.WriteLine($"{result?.EmpName??"not found"}--{result?.Department?.Name??"not found"}");
+            //by defualt navigational property will not be loadded the department name
+            #endregion
+            #region Explicit Loading
+            //var Eresult = (from emp in dbContext.Employees
+            //              where emp.EmpId == 1
+            //              select emp).FirstOrDefault();
+            //dbContext.Entry(Eresult).Reference(r=>r.Department).Load();
+            //Console.WriteLine($"{Eresult?.EmpName ?? "not found"}--{Eresult?.Department?.Name ?? "not found"}");
+
+            //var Dresult = (from dept in dbContext.Departments
+            //              where dept.DeptId == 20
+            //              select dept).FirstOrDefault();
+            //dbContext.Entry(Dresult).Collection(d=>d.Employees).Load();
+            //Console.WriteLine($"{Dresult?.Name ?? "not found"}");
+            //foreach (var item in Dresult.Employees)
+            //{
+            //    Console.WriteLine(item.EmpName);
+            //}
+            #endregion
+            #region Eager Loading
+            var Eresult = (from emp in dbContext.Employees.Include(e=>e.Department)//.ThenInclude(p=>p.)
+                           where emp.EmpId == 1
+                           select emp).FirstOrDefault();
+            Console.WriteLine($"{Eresult?.EmpName ?? "not found"}--{Eresult?.Department?.Name ?? "not found"}");
+
+            var Dresult = (from dept in dbContext.Departments.Include(e => e.Employees)
+                           where dept.DeptId == 20
+                           select dept).FirstOrDefault();
+            Console.WriteLine($"{Dresult?.Name ?? "not found"}");
+            foreach (var item in Dresult.Employees)
+            {
+                Console.WriteLine(item.EmpName);
+            }
             #endregion
             #endregion
         }

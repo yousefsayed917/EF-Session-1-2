@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo_1.Entities
+namespace Demo.Entities
 {
     internal class Course
     {
